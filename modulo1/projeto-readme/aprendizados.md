@@ -1,0 +1,3 @@
+# Aprendizados da semana
+Nessa semana de **onboarding da Labenu**, aprendi sobre o Alan Turing que criou uma maquina baseada nas intruçoes 0 e 1. Aprendi mais sobre os sistemas operacionais e como funciona melhor o terminal que incluisive podemos realizar comandos avançados que permitem realizar alteraçoes no sistema como: **criar, remover, editar arquivos e diretorios**. Conheci plataformas e ferramentas de desenvolvimento como: **GitHub, GitBash, VsCode**.
+E na oficina de empregabilidade falamos sobre soft skills, aprendi como trabalhar melhor em equipe e sempre buscar ter uma boa comunicação com o grupo. 
