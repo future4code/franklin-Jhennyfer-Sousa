@@ -1,0 +1,17 @@
+{
+  "name": "ex2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "soma": "node exercicio2.js soma 2 2",
+    "mult": "node exercicio2.js mult 2 5",
+    "sub": "node exercicio2.js sub 10 3",
+    "div": "node exercicio2.js div 20 2",
+    "default": "node exercicio2.js "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
