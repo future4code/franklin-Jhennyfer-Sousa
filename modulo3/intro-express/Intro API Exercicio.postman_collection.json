@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "49a1a0fa-6b0d-4efe-9913-e222597c7433",
+		"name": "Intro API Exercicio",
+		"description": "Essa API foi criada para a aula de Introdução a APIs e Express. Nela você consegue buscar usuários, ver todas as publicações e ver a publicação pelo :id de um usuário.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21751170"
+	},
+	"item": [
+		{
+			"name": "Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						""
+					]
+				},
+				"description": "Essa requisição foi feita para criar um endpoint que aponte para a URL base da API."
+			},
+			"response": []
+		},
+		{
+			"name": "exercicio2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/exercicio2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"exercicio2"
+					]
+				},
+				"description": "## DESCRIÇÃO:\n\nEssa requisição foi criada para representar o percurso de buscar os usuários.\n\n## OUTPUT\n\n`Body:`\n\n`id:` id do usuário  \n`nome:` nome do usuário  \n`telefone:` telefone do usuário  \n`email:` email do usuário  \n`website:` website do usuário\n\n``` plaintext\n[\n {\n         id: '1',\n         nome: 'Phoebe',\n         telefone: '9328473295',\n         email: 'phoebe@hotmail.com',\n         website: 'www.phoene_music.com.br'\n }\n]\n\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarUsuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"usuarios"
+					]
+				},
+				"description": "## DESCRIÇÃO:\n\nEssa requisição foi criada para buscar os usuários.\n\n## OUTPUT\n\n`Body:`  \n`id:` id do usuário  \n`nome:` nome do usuário  \n`telefone:` telefone do usuário  \n`email:` email do usuário  \n`website:` website do usuário\n\n```\n[\n {\n         id: '1',\n         nome: 'Phoebe',\n         telefone: '9328473295',\n         email: 'phoebe@hotmail.com',\n         website: 'www.phoene_music.com.br'\n }\n]\n\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "VerPublicacoes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/publicacoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"publicacoes"
+					]
+				},
+				"description": "## DESCRIÇÃO:\n\nEssa requisição foi criada para ver todas as publicações dos usuários.\n\n## OUTPUT\n\n`Body`: foi criado um array para poder representar o recurso de publicações.\n\n`id:` id da postagem  \n`titulo:` titulo  \n`texto:` texto  \n`userId:` id do usuário\n\n```\n [\n    {\n        id: 1,\n        titulo: 'Borboletas',\n        texto: 'As borboletas voam',\n        userId: 2\n    }\n  ]\n\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "BucarPublicacao",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/publis/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"publis",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "## DESCRIÇÃO:\n\nEssa requisição foi criada para poder retornar as publicações de somente um usuário.\n\n## INPUT\n\nid do usuário\n\n## OUTPUT\n\n`body:`  \n`id:` id da postagem  \n`titulo:` titulo  \n`texto:` texto  \n`userId:` id do usuário\n\n``` json\n[\n{\n        id: 4,\n        titulo: 'Filme',\n        texto: 'Eu sei o que você fez no verão passado',\n        userId: '1'\n }\n]\n\n```"
+			},
+			"response": []
+		}
+	]
+}
