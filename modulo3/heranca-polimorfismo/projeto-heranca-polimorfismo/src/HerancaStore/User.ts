@@ -3,7 +3,7 @@ export class User {
     private id: string;
     private email: string;
     private name: string;
-    private password: string;
+    protected password: string;
   
     constructor(
           id: string,
@@ -29,6 +29,10 @@ export class User {
       public getName(): string {
           return this.name
       }
-    
+
+      public introduceYourself(): string {
+        return `Olá, bom dia ${this.name}` //template string
+      }
+
   }
 
