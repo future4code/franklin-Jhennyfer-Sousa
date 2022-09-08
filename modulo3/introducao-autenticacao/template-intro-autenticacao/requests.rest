@@ -1,0 +1,39 @@
+# @name signup
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{ 
+   "email": "osbourne@oscorp.com" ,
+   "password": "ihatepeter"
+}
+
+###
+# @name login
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+  "email": "harry@email.com",
+  "password": "ihatepeter"
+}
+
+###
+
+//@token = {{login.response.body.token}} {{token}}
+
+PUT http://localhost:3003/user/edit
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIzZDQxY2NlLTgzODktNDhlMS1iNjRhLWJmMDM2YzFkMmUxMyIsImlhdCI6MTY2MjU5MjkyOCwiZXhwIjoxNjYyNjEwOTI4fQ.BSsQgqIrla-gHLEmRfJwn_LF2rY-6Q4zWw7R7fEdJ8o
+
+{
+   "email": "harry@email.com" 
+}
+
+###
+
+@token={{login.response.body.token}}
+
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: {{token}}

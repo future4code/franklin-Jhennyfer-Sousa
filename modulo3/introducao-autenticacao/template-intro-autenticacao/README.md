@@ -16,7 +16,7 @@ export function generateId(): string {
 
 ## EXERCICIO 02
 
-```typescript
+```sql
 const userTableName = "User";
 
 const connection = knex({
@@ -45,6 +45,53 @@ a) Explique o código acima com as suas palavras.
 
 Foi criada uma variavel userTableName que recebe a tabela User que faz conexao com o banco de dados com o knex. A variavel createUser criacao de endpoint do usuario.
 
-b) Comece criando a tabela de usuários. Coloque a query que você utilizou no arquivo de respostas.
-
 c) Pela mesma justificativa do exercício anterior, crie uma função para ser responsável pela criação de usuários no banco.
+
+```typescript
+const createUser =async (id: string, email: string, password: string) => {
+	  await connection
+	    .insert({
+	      id,
+	      email,
+	      password,
+	    })
+	    .into(userTableName);
+	};
+```
+
+## EXERCICIO 03
+
+a) O que a linha `as string` faz? Por que precisamos usar ela ali?
+
+O `as` irá definir o tipo do valor. Nesse caso ela vira como uma string.
+
+b) Agora, crie a função que gere o token. Além disso, crie um type  para representar o input dessa função.
+
+```typescript
+class Authenticator {
+    generateToken = (payload: authenticationData) => {
+       return jwt.sign(
+            payload,
+            process.env.JWT_KEY as string, 
+            {
+                expiresIn: "5h"
+            }
+        )
+    }
+
+    getTokenData = (token: string) => {
+        const tokenData = jwt.verify(
+            token,  process.env.JWT_KEY as string, 
+        )
+
+        return tokenData
+    }
+}
+```
+
+### EXERCICIO 07
+
+a) O que a linha `as any` faz? Por que precisamos usá-la ali?
+
+O `as` irá definir o tipo do valor.
+
