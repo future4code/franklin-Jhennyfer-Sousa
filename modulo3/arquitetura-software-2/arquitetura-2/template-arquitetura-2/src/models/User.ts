@@ -11,6 +11,17 @@ export interface IUserDB {
     role: USER_ROLES
 }
 
+export interface loginDto {
+    email: string,
+    password: string
+}
+
+export interface signupDto {
+    name: string,
+    email: string,
+    password: string
+}
+
 export class User {
     constructor(
         private id: string,
@@ -59,4 +70,5 @@ export class User {
     public setRole = (newRole: USER_ROLES) => {
         this.role = newRole
     }
+
 }
