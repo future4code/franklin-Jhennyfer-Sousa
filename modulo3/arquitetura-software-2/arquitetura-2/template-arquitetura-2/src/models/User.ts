@@ -22,6 +22,23 @@ export interface signupDto {
     password: string
 }
 
+export interface getUsersDto {
+    token: string | undefined,
+    search: string,
+    order: string,
+    sort: string,
+    limit: string,
+    page: string
+}
+
+export interface dbGetUsersDto {
+    search: string,
+    order: string,
+    sort: string,
+    limit: number,
+    offset: number 
+}
+
 export class User {
     constructor(
         private id: string,
