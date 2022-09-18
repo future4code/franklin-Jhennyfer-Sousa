@@ -1,4 +1,4 @@
-import { IUserDB, USER_ROLES } from "../../models/User"
+import { IUserDB, USER_ROLES } from "../../model/User"
 
 export const users: IUserDB[] = [
     {

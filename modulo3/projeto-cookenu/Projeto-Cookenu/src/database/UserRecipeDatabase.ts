@@ -1,12 +1,12 @@
-import { dbGetUsersDto, IUserDB, User } from "../models/User"
+import { dbGetUsersDto, IUserDB, User } from "../model/User"
 import { BaseDatabase } from "./BaseDatabase"
 
-export class UserDatabase extends BaseDatabase {
-    public static TABLE_USERS = "Arq_Users"
+export class UserRecipeDatabase extends BaseDatabase {
+    public static TABLE_USERS_RECIPE = "UserRecipe"
 
     public findByEmail = async (email: string) => {
         const usersDB: IUserDB[] = await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserRecipeDatabase.TABLE_USERS_RECIPE)
             .select()
             .where({ email })
 
@@ -23,7 +23,7 @@ export class UserDatabase extends BaseDatabase {
         }
 
         await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserRecipeDatabase.TABLE_USERS_RECIPE)
             .insert(userDB)
     }
 
@@ -35,7 +35,7 @@ export class UserDatabase extends BaseDatabase {
         const offset = input.offset
 
         const usersDB: IUserDB[] = await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserRecipeDatabase.TABLE_USERS_RECIPE)
             .select()
             .where("name", "LIKE", `%${search}%`)
             .orderBy(order, sort)
@@ -47,7 +47,7 @@ export class UserDatabase extends BaseDatabase {
 
     public findById = async (id: string) => {
         const usersDB: IUserDB[] = await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserRecipeDatabase.TABLE_USERS_RECIPE)
             .select()
             .where({ id })
 
@@ -56,7 +56,7 @@ export class UserDatabase extends BaseDatabase {
 
     public deleteUser = async (id: string) => {
         await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserRecipeDatabase.TABLE_USERS_RECIPE)
             .delete()
             .where({ id })
     }
@@ -71,7 +71,7 @@ export class UserDatabase extends BaseDatabase {
         }
         
         await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserRecipeDatabase.TABLE_USERS_RECIPE)
             .update(userDB)
             .where({ id: userDB.id })
     }

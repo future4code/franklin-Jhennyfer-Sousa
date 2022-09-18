@@ -7,9 +7,9 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "Bel",
-    "email": "bel@gmail.com",
-    "password": "abc123"
+    "name": "Oliver",
+    "email": "olivercookenu@gmail.com",
+    "password": "cookenu"
 }
 
 ### 2) Login
@@ -22,17 +22,25 @@ Content-Type: application/json
     "password": "bananinha"
 }
 
-### 3) Get users
+### 3) Get All users
 @token = {{login.response.body.token}}
 GET http://localhost:3003/users
 Authorization: {{token}}
 
-### 3) Delete user
-DELETE http://localhost:3003/users/7079b8e4-95cd-48aa-82a9-77454e94b789
+### 4) Get profile
+GET http://localhost:3003/users/profile
+Authorization: {{token}}
+
+### 5) Get user id
+GET http://localhost:3003/users/dbee3af9-fa38-45b3-a92c-701d9c220565
+Authorization: {{token}}
+
+### 6) Delete user
+DELETE http://localhost:3003/users/f03017bb-2c08-4cdc-bb63-7fbd7cebe01f
 Authorization:  {{token}}
 
 
-### 4) Edit user
+### 7) Edit user
 PUT http://localhost:3003/users/bb9b7ee8-ae4b-4bd1-9bd6-e7e21594399b
 Authorization:  {{token}}
 Content-Type: application/json
@@ -40,3 +48,22 @@ Content-Type: application/json
 {
     "name": "Astrodev3"
 }
+
+### 8) Create recipe
+POST http://localhost:3003/recipe
+Content-Type: application/json
+
+{   
+    "title": "Pão Caseiro",
+    "description": "Pão caseiro da vovo",
+    "preparation": "Pegue a massa e faça pão",
+}
+
+### 9) Get all recipe
+GET http://localhost:3003/all
+Content-Type: application/json
+
+
+### 10) Get recipe by id
+GET http://localhost:3003/recipe/05770030-8d92-4813-a7fd-3da855ba4f1b
+Content-Type: application/json

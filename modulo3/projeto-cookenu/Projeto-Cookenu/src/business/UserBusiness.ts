@@ -1,18 +1,18 @@
-import { UserDatabase } from "../database/UserDatabase"
-import { dbGetUsersDto, getUsersDto, loginDto, signupDto, User, USER_ROLES } from "../models/User"
+import { UserRecipeDatabase } from "../database/UserRecipeDatabase"
+import { dbGetUsersDto, getUsersDto, loginDto, signupDto, User, USER_ROLES } from "../model/User"
 import { Authenticator, ITokenPayload } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 
 export class UserBusiness {
-
     constructor(
-        protected userDatabase: UserDatabase,
+        protected userDatabase: UserRecipeDatabase,
         protected idGenerator: IdGenerator,
         protected authenticator: Authenticator,
         protected hashManager: HashManager    
     ){}
-
+    
+    //Cadastro
     public signup = async (input: signupDto) => {
         const name = input.name
         const email = input.email
@@ -34,10 +34,9 @@ export class UserBusiness {
             throw new Error("Parâmetro 'email' inválido")
         }
 
-        if (typeof password !== "string" || password.length < 3) {
-            throw new Error("Parâmetro 'password' inválido")
+        if (typeof password !== "string" || password.length < 6) {
+            throw new Error("Parâmetro 'password' inválido, insira ao menos 6 digitos")
         }
-
        
         const userDB = await this.userDatabase.findByEmail(email)
 
@@ -48,6 +47,7 @@ export class UserBusiness {
         const id = this.idGenerator.generate()
         const hashedPassword = await this.hashManager.hash(password)
 
+        //Instancia de usuario
         const user = new User(
             id,
             name,
@@ -63,7 +63,6 @@ export class UserBusiness {
             role: user.getRole()
         }
 
-       
         const token = this.authenticator.generateToken(payload)
 
         const response = {
@@ -74,6 +73,7 @@ export class UserBusiness {
         return response
     }
 
+    //Login
     public login = async (input: loginDto) => {
         const email = input.email
         const password = input.password
@@ -90,7 +90,7 @@ export class UserBusiness {
             throw new Error("Parâmetro 'email' inválido")
         }
 
-        if (typeof password !== "string" || password.length < 3) {
+        if (typeof password !== "string" || password.length < 6) {
             throw new Error("Parâmetro 'password' inválido")
         }
 
@@ -183,6 +183,63 @@ export class UserBusiness {
 
         return response
     }
+
+    public getUserProfile = async (input: any) => {
+
+        const token = input.token
+      
+        if(!token) {
+            throw new Error("Token faltando!")
+        }
+
+        const authenticator = new Authenticator()
+        const payload = authenticator.getTokenPayload(token)
+
+        if (!payload) {
+            throw new Error("Token inválido!")
+        }
+
+        const user = await this.userDatabase.findById(payload.id)
+
+            const Response = {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+
+            return Response
+        }
+
+        public getUserById = async (input: any) => {
+
+            const token = input.token
+            const id = input.id
+          
+            if(!token) {
+                throw new Error("Token faltando!")
+            }
+    
+            const payload = this.authenticator.getTokenPayload(token)
+    
+            if (!payload) {
+                throw new Error("Token inválido!")
+            }
+    
+            const user = await this.userDatabase.findById(id)
+
+            if (!id) {
+                throw new Error("O usuário não existe!")
+            }
+    
+                const Response = {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email
+                }
+    
+                return Response
+            } 
+
 
     public deleteUser = async (input: any) => {
         const token = input.token
