@@ -13,12 +13,24 @@ export class RecipeBusiness {
     ){}
     
     public recipeCreate = async (input: any) => {
+        const token = input.token
         const title = input.title
         const description = input.description
         const preparation = input.prepare
         const created = input.created
 
+        if(!token) {
+            throw new Error("Missing token")
+        }
 
+        const authenticator = new Authenticator()
+        const payload = authenticator.getTokenPayload(token)
+
+        if (!payload) {
+            throw new Error("Invalid Token!")
+        }
+
+        
         if (!title || !description || !preparation) {
             throw new Error("Um ou mais parâmetros faltando")
         }
@@ -50,7 +62,7 @@ export class RecipeBusiness {
 
     public getRecipeAll = async (input: any) => {
         const search = input.search || ""
-        const order = input.order || "name"
+        const order = input.order || "title"
         const sort = input.sort || "ASC"
         const limit = Number(input.limit) || 10
         const page = Number(input.page) || 1

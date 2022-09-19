@@ -17,7 +17,7 @@ const recipeController = new RecipeController(
     )
 )
 
-routerRecipe.post("/recipe", recipeController.recipeCreate)
+routerRecipe.post("/create", recipeController.recipeCreate)
 routerRecipe.get("/all", recipeController.getRecipeAll)
 routerRecipe.get("/:id", recipeController.getRecipeID)
 

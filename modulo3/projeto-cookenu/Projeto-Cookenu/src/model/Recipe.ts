@@ -3,7 +3,7 @@ export interface IRecipesDB {
     title: string,
     description: string,
     preparation: string,
-    created: string 
+    created: Date 
 }
 
 export interface getRecipesDto {
@@ -28,7 +28,7 @@ export class Recipes {
         private title: string,
         private description: string,
         private preparation: string,
-        private created: string,
+        private created: Date
     ) {}
 
     public getId = () => {
@@ -67,7 +67,7 @@ export class Recipes {
         this.preparation = newPreparation
     }
 
-    public setCreated = (newCreated: string) => {
+    public setCreated = (newCreated: Date) => {
         this.created = newCreated
     }
 

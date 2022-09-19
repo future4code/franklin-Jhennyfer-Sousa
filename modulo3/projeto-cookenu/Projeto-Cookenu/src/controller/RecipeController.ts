@@ -9,6 +9,7 @@ export class RecipeController {
     public recipeCreate = async (req: Request, res: Response) => {
         try {
             const input: any = {
+                token: req.headers.authorization,
                 title: req.body.title,
                 description: req.body.description,
                 preparation: req.body.preparation

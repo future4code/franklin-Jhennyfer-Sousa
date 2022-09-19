@@ -1,4 +1,4 @@
-import { dbGetRecipesDto, getRecipesDto, IRecipesDB, Recipes } from "../model/Recipe"
+import { IRecipesDB, Recipes } from "../model/Recipe"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class RecipesDatabase extends BaseDatabase {

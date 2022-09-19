@@ -49,21 +49,3 @@ Content-Type: application/json
     "name": "Astrodev3"
 }
 
-### 8) Create recipe
-POST http://localhost:3003/recipe
-Content-Type: application/json
-
-{   
-    "title": "Pão Caseiro",
-    "description": "Pão caseiro da vovo",
-    "preparation": "Pegue a massa e faça pão",
-}
-
-### 9) Get all recipe
-GET http://localhost:3003/all
-Content-Type: application/json
-
-
-### 10) Get recipe by id
-GET http://localhost:3003/recipe/05770030-8d92-4813-a7fd-3da855ba4f1b
-Content-Type: application/json
