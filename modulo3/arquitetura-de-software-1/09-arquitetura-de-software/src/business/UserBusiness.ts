@@ -52,4 +52,39 @@ export default class UserBusiness {
 
         return response
     }
+
+    public login = async (input: any) => {
+        const email = input.email
+        const password = input.password
+        const userDb = new UserDatabase() 
+
+        if (!email || typeof email !== "string") {
+            throw new Error("Parâmetro 'email' inválido")
+        }
+
+        if (!email.includes('@')) {
+            throw new Error("Email inválido")
+        }
+
+        const hashManager = new HashManager()
+        const hashPassword = await hashManager.compare(password, )
+        
+
+        const userDatabase = new UserDatabase()
+        await userDatabase.createUser(user)
+
+        const payload: ITokenPayload = {
+            id: user.getId(),
+            role: user.getRole()
+        }
+
+        const authenticator = new Authenticator()
+        const token = authenticator.generateToken(payload)
+
+        const response = {
+            token
+        }
+
+        return response
+    }
 }
