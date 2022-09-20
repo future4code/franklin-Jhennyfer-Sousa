@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from "dotenv"
-import UserController from './controller/UserController'
+import { useRouter } from './routes/usersRouter'
 
 dotenv.config()
 
@@ -13,6 +13,5 @@ app.listen(process.env.PORT || 3003, () => {
     console.log(`Servidor rodando na porta ${process.env.PORT || 3003}`)
 })
 
-const userController = new UserController()
 
-app.post("/users/signup", userController.signup)
+app.use('/users', useRouter)

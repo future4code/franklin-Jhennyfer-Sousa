@@ -11,6 +11,23 @@ export interface IUserDB {
     role: USER_ROLES
 }
 
+export interface InGetUsersDTO {
+    token: string | undefined,
+    search: string,
+    order: string,
+    sort: string,
+    limit: string,
+    page: string
+}
+
+export interface InGetUsersDBDTO {
+    search: string,
+    order: string,
+    sort: string,
+    limit: number,
+    offset: number
+}
+
 export class User {
     constructor(
         private id: string,

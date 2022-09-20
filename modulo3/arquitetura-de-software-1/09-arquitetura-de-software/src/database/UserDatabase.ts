@@ -1,4 +1,4 @@
-import { IUserDB, User } from "../model/User";
+import { InGetUsersDBDTO, IUserDB, User } from "../model/User";
 import { BaseDatabase } from "./BaseDatabase";
 
 export default class UserDatabase extends BaseDatabase {
@@ -21,5 +21,48 @@ export default class UserDatabase extends BaseDatabase {
 
         await BaseDatabase.connection(UserDatabase.TABLE_USERS)
             .insert(userDB)
+    }
+
+    public deleteUser = async (id: string) => {
+        await BaseDatabase
+            .connection(UserDatabase.TABLE_USERS)
+            .delete()
+            .where({ id })
+    }
+
+    public getUserByEmail = async (email: string) => {
+        const usersDB: IUserDB[] = await BaseDatabase
+            .connection(UserDatabase.TABLE_USERS)
+            .select()
+            .where({ email })
+
+        return usersDB[0]
+    }
+
+    public getUserById = async (id: string) => {
+        const usersDB: IUserDB[] = await BaseDatabase
+            .connection(UserDatabase.TABLE_USERS)
+            .select()
+            .where({ id })
+
+        return usersDB[0]
+    }
+
+    public getAllUsers = async (input: InGetUsersDBDTO) => {
+        const search = input.search
+        const order = input.order
+        const sort = input.sort
+        const limit = input.limit
+        const offset = input.offset
+
+        const result: IUserDB[]  = await BaseDatabase
+            .connection(UserDatabase.TABLE_USERS)
+            .select()
+            .where("name", "LIKE", `%${search}%`)
+            .orderBy(order, sort)
+            .limit(limit)
+            .offset(offset)
+        
+        return result
     }
 }

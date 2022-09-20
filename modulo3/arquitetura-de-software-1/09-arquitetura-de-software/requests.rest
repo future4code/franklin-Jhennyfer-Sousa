@@ -3,7 +3,26 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "Beltrano",
-    "email": "beltrano@gmail.com",
+    "name": "Moni",
+    "email": "moni@gmail.com",
     "password": "abc123"
 }
+
+### 2)
+POST  http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "tadeu@gmail.com",
+    "password": "abc123"
+}
+
+### 3)
+GET http://localhost:3003/users/all
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMjk3OWE2LWNkNTQtNDgyOS1hOWE2LWViZjk3NTYxYWJmOCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjM2NDk0ODcsImV4cCI6MTY2MzczNTg4N30.8wevVr6BILYYTcOJV5lPuEXlP7bn7L3jbo5QstjQwFU
+
+### 4)
+DELETE http://localhost:3003/02b9cac1-9784-4ec8-829e-6dd11ca23606
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMzMjk3OWE2LWNkNTQtNDgyOS1hOWE2LWViZjk3NTYxYWJmOCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjM2NDU3NDAsImV4cCI6MTY2MzczMjE0MH0._CnG-d5KZwigH0LPwHzvty54Y79Li2xJYAV0ORX_QhQ
