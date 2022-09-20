@@ -1,0 +1,167 @@
+import { Request, Response } from "express";
+import { UserBusiness } from "../business/UserBusiness";
+import { getUsersDto, loginDto, signupDto } from "../model/User";
+
+//controller: recebe as requisiçoes e devolve as respostas 
+export class UserController {
+        constructor(
+        protected userBusiness: UserBusiness,
+    ){}
+
+    public signup = async (req: Request, res: Response) => {
+        try {
+            //modelando objeto que sera chamado para a proxima camada(UserBusines)
+            const input: signupDto = {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password
+            }
+
+            //userBusiness retornara a responsta
+            const response = await this.userBusiness.signup(input)
+
+            res.status(201).send(response)
+        } catch (error) {
+            console.log(error)
+
+            if (error instanceof Error) {
+                return res.status(400).send({ message: error.message })
+            }
+
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+
+    public login = async (req: Request, res: Response) => {
+        try {
+            const input: loginDto = {
+                email: req.body.email,
+                password: req.body.password
+            }
+
+            const response = await this.userBusiness.login(input)
+
+            res.status(200).send(response)
+        } catch (error) {
+            console.log(error)
+            
+            if (error instanceof Error) {
+                return res.status(400).send({ message: error.message })
+            }
+
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+
+    public getUsers = async (req: Request, res: Response) => {
+        try {
+            const input: getUsersDto = {
+                token: req.headers.authorization,
+                search: req.query.search as string,
+                order: req.query.order as string,
+                sort: req.query.sort as string,
+                limit: req.query.limit as string,
+                page: req.query.page as string
+            }
+
+            const response = await this.userBusiness.getUsers(input)
+
+            res.status(200).send(response)
+        } catch (error) {
+            console.log(error)
+            
+            if (error instanceof Error) {
+                return res.status(400).send({ message: error.message })
+            }
+
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+
+    public getUserProfile = async (req: Request, res: Response) => {
+        try {
+            const input: any = {
+                token: req.headers.authorization
+            }
+
+            const response = await this.userBusiness.getUserProfile(input)
+
+            res.status(200).send(response)
+        } catch (error) {
+            console.log(error)
+            
+            if (error instanceof Error) {
+                return res.status(400).send({ message: error.message })
+            }
+
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+
+    public getUserByID = async (req: Request, res: Response) => {
+        try {
+            const input: any = {
+                token: req.headers.authorization,
+                id:  req.params.id
+            }
+
+            const response = await this.userBusiness.getUserById(input)
+
+            res.status(200).send(response)
+        } catch (error) {
+            console.log(error)
+            
+            if (error instanceof Error) {
+                return res.status(400).send({ message: error.message })
+            }
+
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+
+
+    public deleteUser = async (req: Request, res: Response) => {
+        try {
+            const input: any = {
+                token: req.headers.authorization,
+                idToDelete: req.params.id
+            }
+
+            const response = await this.userBusiness.deleteUser(input)
+
+            res.status(200).send(response)
+        } catch (error) {
+            console.log(error)
+            
+            if (error instanceof Error) {
+                return res.status(400).send({ message: error.message })
+            }
+
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+
+    public editUser = async (req: Request, res: Response) => {
+        try {
+            const input: any = {
+                token: req.headers.authorization,
+                idToEdit: req.params.id,
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password
+            }
+
+            const response = await this.userBusiness.editUser(input)
+
+            res.status(200).send(response)
+        } catch (error) {
+            console.log(error)
+            
+            if (error instanceof Error) {
+                return res.status(400).send({ message: error.message })
+            }
+
+            res.status(500).send({ message: "Erro inesperado" })
+        }
+    }
+}
