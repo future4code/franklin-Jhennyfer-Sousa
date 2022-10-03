@@ -1,0 +1,35 @@
+### 0) Get result
+
+GET http://localhost:3003/users
+
+### 1) Create competition
+# @name createCompetition
+POST http://localhost:3003/competition/create/competition
+Content-Type: application/json
+
+{
+    "id": "4",
+    "modality": "100m rasos"
+}
+
+### 2) create result
+# @name createResult
+POST http://localhost:3003/competition/create/result
+Content-Type: application/json
+
+{
+    "athlete_id": "01",
+    "competition_id": "01",
+    "value": "44.1",
+    "unity":"m"
+
+}
+
+### 3) Edit competition
+PUT http://localhost:3003/competition/01
+Content-Type: application/json
+
+{
+    "status": "closed"
+}
+
