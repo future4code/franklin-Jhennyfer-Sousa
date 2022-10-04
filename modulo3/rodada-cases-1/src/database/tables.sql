@@ -22,3 +22,9 @@ CREATE TABLE IF NOT EXISTS result (
 SELECT athlete.name, result.value FROM athlete LEFT JOIN result ON
 athlete.id = result.athlete_id WHERE result.competition_id = '01'
 ORDER BY result.value DESC
+
+
+DETALHES 2.
+SELECT athlete.name AS Athlete, result.value AS Ranking FROM athlete LEFT JOIN result ON
+athlete.id = result.athlete_id WHERE result.competition_id = '01'
+ORDER BY result.value DESC

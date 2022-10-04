@@ -1,21 +1,22 @@
 import { CompetitionDatabase } from "../database/CompetitionDatabase"
+import { AthleteDto, dbGetAthleteDto, getAthleteDto } from "../dtos/athlete.dto"
 import { CompetitionDto } from "../dtos/competition.dto"
 import { ResultDto } from "../dtos/result.dto"
+import { Athlete } from "../models/Athlete"
 import { Competition, Status } from "../models/Competition"
 import { Result } from "../models/Result"
 import { IdGenerator } from "../services/IdGenerator"
 
-//user
 export class CompetitionBusiness {
+    CompetitionDatabase: any
     endCompetition(input: CompetitionDto) {
         throw new Error("Method not implemented.")
     }
     constructor(
         protected competitionDatabase: CompetitionDatabase,
         protected idGenerator: IdGenerator,
-    ){}
+    ) { }
 
-//signup, criar usuario
     public createCompetition = async (input: CompetitionDto) => {
         const id = input.id
         const modality = input.modality
@@ -26,7 +27,7 @@ export class CompetitionBusiness {
         }
 
 
-        const competition = new Competition (
+        const competition = new Competition(
             id,
             modality,
             Status.open
@@ -75,7 +76,6 @@ export class CompetitionBusiness {
 
     public finishCompetition = async (input: any) => {
         const {
-            //token,
             id,
             status
         } = input
@@ -90,7 +90,7 @@ export class CompetitionBusiness {
             throw new Error("A competição a ser atualizada não existe")
         }
 
-        const comp = new Competition (
+        const comp = new Competition(
             competitionDb.id,
             competitionDb.modality,
             competitionDb.status
@@ -107,4 +107,58 @@ export class CompetitionBusiness {
         return response
     }
 
+    public getModalityResult = async (input: any) => {
+        const id = input
+        const modalityId = await this.competitionDatabase.getById(id)
+
+        if (!modalityId) {
+            throw new Error("Não existe competição cadastrada para o id informado")
+        }
+
+        const result = await this.competitionDatabase.getModalityResult(id)
+
+        return result
+    }
+
+    public getAllAthletes = async (input: getAthleteDto) => {
+        const search = input.search || ""
+        const order = input.order || "name"
+        const sort = input.sort || "ASC"
+        const limit = Number(input.limit) || 10
+        const page = Number(input.page) || 1
+
+        const offset = limit * (page - 1)
+
+        const getAthleteInputDB: dbGetAthleteDto = {
+            search,
+            order,
+            sort,
+            limit,
+            offset
+        }
+
+        const athleteDB: AthleteDto[] = await this.competitionDatabase.getAthleteProfile(getAthleteInputDB)
+
+        const athletes = athleteDB.map(athDB => {
+            const athProfile = new Athlete(
+                athDB.id,
+                athDB.name,
+                athDB.age
+            )
+
+            const result: any = {
+                id: athProfile.getId(),
+                name: athProfile.getName(),
+                age: athProfile.getAge()
+            }
+
+            return result
+        })
+
+        const response: any = {
+            athletes
+        }
+
+        return response
+    }
 }

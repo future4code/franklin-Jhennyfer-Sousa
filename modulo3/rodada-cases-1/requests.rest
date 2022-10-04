@@ -1,7 +1,3 @@
-### 0) Get result
-
-GET http://localhost:3003/users
-
 ### 1) Create competition
 # @name createCompetition
 POST http://localhost:3003/competition/create/competition
@@ -26,10 +22,19 @@ Content-Type: application/json
 }
 
 ### 3) Edit competition
-PUT http://localhost:3003/competition/01
+PUT http://localhost:3003/competition/02
 Content-Type: application/json
 
 {
     "status": "closed"
 }
+
+### 4) Get Result By Modality
+GET http://localhost:3003/competition/result/02
+Content-Type: application/json
+
+### 5) Get all athletes
+GET http://localhost:3003/competition/athletes
+Content-Type: application/json
+
 

@@ -13,8 +13,9 @@ const competitionController = new CompetitionController(
     )
 )
 
+competitionRouter.get("/athletes", competitionController.getAthletes) 
 competitionRouter.post("/create/competition", competitionController.createCompetition)
 competitionRouter.post("/create/result", competitionController.createResult)
+competitionRouter.get("/result/:id", competitionController.getModalityResult) 
 competitionRouter.put("/:id", competitionController.finishCompetition)
-/* competitionRouter.get("/", competitionController.getUsers)
-competitionRouter.put("/:id", competitionController.editUser) */
+

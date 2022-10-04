@@ -1,10 +1,9 @@
-import { CpuInfo } from "os"
+import { dbGetAthleteDto } from "../dtos/athlete.dto"
 import { Athlete, AthleteDb } from "../models/Athlete"
 import { CompetitionDb, Competition } from "../models/Competition"
 import { Result, ResultDb } from "../models/Result"
 import { BaseDatabase } from "./BaseDatabase"
 
-//UserDatabase/TABLE_USERS
 export class CompetitionDatabase extends BaseDatabase {
     public static athlete = "athlete"
     public static competition = "competition"
@@ -53,7 +52,7 @@ export class CompetitionDatabase extends BaseDatabase {
             modality: competition.getModality(),
             status: competition.getStatus(),
         }
-        
+
         await BaseDatabase
             .connection(CompetitionDatabase.competition)
             .update(competitionDb)
@@ -69,4 +68,30 @@ export class CompetitionDatabase extends BaseDatabase {
         return result[0]
     }
 
+    public getModalityResult = async (id: string) => {
+        const resultDb: any[] = await BaseDatabase
+            .connection.raw(`SELECT athlete.name AS Athlete, result.value AS Ranking FROM athlete LEFT JOIN result ON
+        athlete.id = result.athlete_id WHERE result.competition_id = '${id}'
+        ORDER BY result.value DESC`)
+
+        return resultDb[0]
+    }
+
+    public getAthleteProfile = async (input: dbGetAthleteDto) => {
+        const search = input.search
+        const order = input.order
+        const sort = input.sort
+        const limit = input.limit
+        const offset = input.offset
+
+        const usersDB: AthleteDb[] = await BaseDatabase
+            .connection(CompetitionDatabase.athlete)
+            .select()
+            .where("name", "LIKE", `%${search}%`)
+            .orderBy(order, sort)
+            .limit(limit)
+            .offset(offset)
+
+        return usersDB
+    }
 }

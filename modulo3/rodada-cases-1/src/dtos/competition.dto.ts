@@ -1,4 +1,3 @@
-//IUserDb
 export interface CompetitionDto {
     id: string;
     status: string;

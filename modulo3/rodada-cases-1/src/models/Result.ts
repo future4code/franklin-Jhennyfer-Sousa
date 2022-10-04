@@ -1,4 +1,3 @@
-//IUserDb
 export interface ResultDb {
     athlete_id: string,
     competition_id: string,
@@ -33,7 +32,7 @@ export interface dbGetUsersDto {
     limit: number,
     offset: number 
 }
-//user
+
 export class Result {
     constructor(
         private athlete_id: string,

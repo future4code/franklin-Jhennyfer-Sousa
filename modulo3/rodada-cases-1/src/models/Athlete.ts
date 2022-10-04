@@ -1,38 +1,9 @@
-//IUserDb
 export interface AthleteDb {
     id: string,
     name: string,
     age: number,
 }
 
-export interface loginDto {
-    email: string,
-    password: string
-}
-
-export interface competitionDto {
-    name: string,
-    email: string,
-    password: string
-}
-
-export interface getUsersDto {
-    token: string | undefined,
-    search: string,
-    order: string,
-    sort: string,
-    limit: string,
-    page: string
-}
-
-export interface dbGetUsersDto {
-    search: string,
-    order: string,
-    sort: string,
-    limit: number,
-    offset: number 
-}
-//user
 export class Athlete {
     constructor(
         private id: string,

@@ -48,3 +48,5 @@ Através da API, deveremos ser capazes de:
 
 
 SELECT athlete.name, result.value FROM athlete LEFT JOIN result ON athlete.id = result.athlete_id WHERE result.competition_id = '01' ORDER BY result.value DESC
+
+
