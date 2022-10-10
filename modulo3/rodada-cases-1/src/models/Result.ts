@@ -5,34 +5,6 @@ export interface ResultDb {
     unity: string
 }
 
-export interface loginDto {
-    email: string,
-    password: string
-}
-
-export interface competitionDto {
-    name: string,
-    email: string,
-    password: string
-}
-
-export interface getUsersDto {
-    token: string | undefined,
-    search: string,
-    order: string,
-    sort: string,
-    limit: string,
-    page: string
-}
-
-export interface dbGetUsersDto {
-    search: string,
-    order: string,
-    sort: string,
-    limit: number,
-    offset: number 
-}
-
 export class Result {
     constructor(
         private athlete_id: string,

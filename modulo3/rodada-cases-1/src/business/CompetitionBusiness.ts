@@ -5,16 +5,10 @@ import { ResultDto } from "../dtos/result.dto"
 import { Athlete } from "../models/Athlete"
 import { Competition, Status } from "../models/Competition"
 import { Result } from "../models/Result"
-import { IdGenerator } from "../services/IdGenerator"
 
 export class CompetitionBusiness {
-    CompetitionDatabase: any
-    endCompetition(input: CompetitionDto) {
-        throw new Error("Method not implemented.")
-    }
     constructor(
         protected competitionDatabase: CompetitionDatabase,
-        protected idGenerator: IdGenerator,
     ) { }
 
     public createCompetition = async (input: CompetitionDto) => {
@@ -25,7 +19,6 @@ export class CompetitionBusiness {
         if (!id || !modality) {
             throw new Error("Um ou mais parâmetros faltando")
         }
-
 
         const competition = new Competition(
             id,
@@ -81,7 +74,7 @@ export class CompetitionBusiness {
         } = input
 
         if (!status) {
-            throw new Error("Parâmetros faltando")
+            throw new Error("Um ou mais parâmetros faltando")
         }
 
         const competitionDb = await this.competitionDatabase.getById(id)

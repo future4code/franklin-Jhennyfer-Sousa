@@ -1,7 +1,6 @@
 import { CompetitionController } from "../controller/CompetitionController"
 import {Router} from "express"
 import { CompetitionDatabase } from "../database/CompetitionDatabase"
-import { IdGenerator } from "../services/IdGenerator"
 import { CompetitionBusiness } from "../business/CompetitionBusiness"
 
 export const competitionRouter = Router()
@@ -9,7 +8,6 @@ export const competitionRouter = Router()
 const competitionController = new CompetitionController(
     new CompetitionBusiness(
         new CompetitionDatabase(),
-        new IdGenerator()
     )
 )
 

@@ -15,23 +15,6 @@ export interface loginDto {
     password: string
 }
 
-export interface getUsersDto {
-    token: string | undefined,
-    search: string,
-    order: string,
-    sort: string,
-    limit: string,
-    page: string
-}
-
-export interface dbGetUsersDto {
-    search: string,
-    order: string,
-    sort: string,
-    limit: number,
-    offset: number 
-}
-//user
 export class Competition {
     constructor(
         private id: string,
