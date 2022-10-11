@@ -2,7 +2,8 @@
 
 ## EstanteVirtual
 
-Esta case Teste prático da EstanteVirtual foi escolhida pela afinidade que tive. 
+Esta case Teste prático da EstanteVirtual foi escolhida pela afinidade que tive.
+Link da documentação: https://documenter.getpostman.com/view/21751170/2s83ziN4BH
 
 ## Jogos Olímpicos
 Com a chegada dos jogos olímpicos, fomos designados para construir uma API REST para o COB (Comitê Olímico Brasileiro), que será responsável por marcar e dizer os vencedores das seguintes modalidades:
