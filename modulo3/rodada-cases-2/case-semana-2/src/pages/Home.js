@@ -1,36 +1,47 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
-import './MovieGrid.css'
+import request from "../services/api";
+import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import "./MovieGrid.css";
 
-/* const MOVIES_URL =  process.env.REACT_APP_API;
-const API_KEY = process.env.REACT_APP_API_KEY; */
-
-const MOVIES_URL =  "https://api.themoviedb.org/3/movie/"
-const API_KEY = "api_key=0ece83219b48ac01b14b9c990a574227"
+const API_KEY = "api_key=0ece83219b48ac01b14b9c990a574227";
 
 const Home = () => {
   const [topMovies, setTopMovies] = useState([]);
 
-  const getTopRatedMovies = async (url) => {
-    const res = await fetch(url);
-    const data = await res.json();
-    setTopMovies(data.results)
+  const [page, setPage] = useState(1);
+
+  const pagP = () => {
+    setPage(page + 1);
   };
 
-  useEffect(() => {
-    const topRatedUrl = `${MOVIES_URL}top_rated?${API_KEY}`;
-    console.log(topRatedUrl)
-    getTopRatedMovies(topRatedUrl);
-  }, []);
+  const pagN = () => {
+    setPage(page - 1);
+  };
+
+  const getTopRatedMovies = () => {
+    request.get(`movie/top_rated?${API_KEY}&language=pt-BR&page=${page}`)
+    .then((res) => {
+      setTopMovies(res.data.results)
+    }).catch((error) => {
+      console.log(error.code)
+    })
+  };
+
+  useEffect(getTopRatedMovies, [page]);
 
   return (
     <div className="container">
-        <h2 className="title">Melhores filmes:</h2>
-        <div className="movies-container">
+      <h2 className="title">Melhores filmes:</h2>
+      <div className="movies-container">
         {topMovies.length === 0 && <p>loading...</p>}
         {topMovies.length > 0 &&
-      topMovies.map((movie) => <MovieCard key={movie.id} movie={movie}/>)}
-        </div>
+          topMovies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+      </div> 
+      <div className="page"> 
+      <button onClick={pagN}><GoArrowLeft/></button>
+      <button onClick={pagP}><GoArrowRight/></button>
+      </div> 
     </div>
   );
 };

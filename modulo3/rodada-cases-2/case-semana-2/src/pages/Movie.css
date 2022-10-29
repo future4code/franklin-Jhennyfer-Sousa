@@ -52,3 +52,23 @@
 .description p {
   line-height: 1.4rem;
 }
+
+.page button {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-decoration: none;
+  background-color: transparent; 
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 15px 32px;
+  text-align: center; 
+}
+
+.page button:hover {
+  background-color: transparent;
+  color: #612f66;
+
+}

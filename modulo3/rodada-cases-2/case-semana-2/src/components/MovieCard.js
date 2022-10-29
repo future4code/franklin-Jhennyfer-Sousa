@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom'
 import { FaStar} from 'react-icons/fa'
 import React from "react";
 
-/* const imageUrl = process.env.REACT_APP_IMG; */
-
 const imageUrl = "https://image.tmdb.org/t/p/w500/"
 
 const MovieCard = ({movie, showLink = true}) => {
