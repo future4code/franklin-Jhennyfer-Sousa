@@ -9,3 +9,6 @@ Usando a API de filmes themoviedb, foi criado uma listagem dos filmes mais popul
 
 Para garantir que o usuário encontre o filme que está procurando, essa lista é paginada.
 
+### Link do Surge
+
+https://franklin-jhennyfer.surge.sh/
